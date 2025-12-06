@@ -14,7 +14,7 @@ class ModelTrainerTrainingPipeline:
         model_trainer = ModelTrainer(config=model_trainer_config)
         
         best_model = model_trainer.train()
-        logger.info(f"Best model from training stage: {best_model[0]} with RMSE={best_model[2]}")
+        logger.info(f"Best model from training stage: {best_model['name']} with RMSE={best_model['rmse']}")
         
 if __name__ == "__main__":
     try:
