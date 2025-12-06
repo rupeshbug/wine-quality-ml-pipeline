@@ -6,6 +6,9 @@ from src.datascience.pipeline.prediction import PredictionPipeline
 
 app = Flask(__name__)
 
+# Load the model once at startup
+prediction_pipeline = PredictionPipeline()
+
 # route to display the home page
 @app.route('/', methods=['GET'])  
 def homePage():
@@ -54,9 +57,8 @@ def index():
             input_df = pd.DataFrame(user_input)
 
             # Make prediction
-            obj = PredictionPipeline()
-            prediction = obj.predict(input_df)
-            pred_value = round(float(prediction[0]), 2)  # 2 decimal places
+            prediction = prediction_pipeline.predict(input_df)
+            pred_value = round(float(prediction[0]), 2)
 
             return render_template('results.html', prediction=f"{pred_value}/10")
 
