@@ -101,8 +101,14 @@ class ModelTrainer:
         # Save all models as one dictionary
         all_models_path = os.path.join(self.config.root_dir, "all_models.joblib")
         joblib.dump(all_models, all_models_path)
+        logger.info(f"All models saved at: {all_models_path}")
+        
+        # Save the best model separately
+        best_model_path = os.path.join(self.config.root_dir, "best_model.joblib")
+        joblib.dump(best_model[1], best_model_path)
+        logger.info(f"Best model ({best_model[0]}) saved at: {best_model_path}")
         
         logger.info(f"Best model: {best_model[0]} with RMSE={best_rmse}")
-        return best_model
+        return best_model, best_model_path
                 
                 
